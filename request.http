@@ -1,0 +1,71 @@
+
+###
+GET {{host}}/users/all
+Authorization: Bearer {{token}}
+
+###
+GET {{host}}/photos
+Authorization: Bearer {{token}}
+
+
+###
+POST {{host}}/users/register
+Content-Type: application/json
+
+{
+  "full_name": "Diory Pribadi Sinaga",
+  "email": "diory2@gmail.com",
+  "username": "pribadi2",
+  "password": "Diory123?",
+  "profile_image_url": "https://res.cloudinary.com/dt3pzvmfg/image/upload/v1658573452/x1bbffnq1cold8srit8p.jpg",
+  "age": 21,
+  "phone_number":"081273232"
+}
+
+###
+POST {{host}}/users/login
+Content-Type: application/json
+
+{
+  "email": "diory1@gmail.com",
+  "password": "Diory123?"
+}
+
+###
+PUT {{host}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "full_name": "Diory Pribadi Sinaga",
+  "email": "diory2@gmail.com"
+}
+
+###
+POST {{host}}/photos/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "poster_image_url": "https://res.cloudinary.com/dt3pzvmfg/image/upload/v1658573452/x1bbffnq1cold8srit8p.jpg",
+  "title": "Photo Diory 2",
+  "caption": "Foto Diory 2"
+}
+
+###
+PUT {{host}}/photos/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Photo Keren"
+}
+###
+DELETE {{host}}/users/5
+Authorization: Bearer {{token}}
+
+###
+DELETE {{host}}/photos/2
+Authorization: Bearer {{token}}
+
+
