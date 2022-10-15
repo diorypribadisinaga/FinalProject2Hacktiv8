@@ -9,7 +9,7 @@ class PhotoController {
                     model: Comment, 
                     as: 'Comment', 
                     attributes:['comment'], 
-                    include: [{model: User, attributes: ['username']}]}
+                    include: [{model: User, attributes: ['id','username']}]}
             ], 
             order:[['id','ASC']]});
             res.status(200).json(result)

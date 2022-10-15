@@ -104,9 +104,6 @@ class UsersController {
 				throw {name:"not allowed"}
 			}
 			await User.destroy({where:{id}})
-			await Photo.destroy({
-				where:{UserId:user.id}
-			})
 			res.json({message:"Your account has been successfully deleted"})
 		}catch (err) {
 			next(err)

@@ -13,9 +13,9 @@ POST {{host}}/users/register
 Content-Type: application/json
 
 {
-  "full_name": "Diory Pribadi Sinaga",
-  "email": "diory2@gmail.com",
-  "username": "pribadi2",
+  "full_name": "sinaga",
+  "email": "sinaga@gmail.com",
+  "username": "sinaga",
   "password": "Diory123?",
   "profile_image_url": "https://res.cloudinary.com/dt3pzvmfg/image/upload/v1658573452/x1bbffnq1cold8srit8p.jpg",
   "age": 21,
@@ -27,7 +27,7 @@ POST {{host}}/users/login
 Content-Type: application/json
 
 {
-  "email": "diory1@gmail.com",
+  "email": "sinaga@gmail.com",
   "password": "Diory123?"
 }
 
@@ -48,8 +48,8 @@ Content-Type: application/json
 
 {
   "poster_image_url": "https://res.cloudinary.com/dt3pzvmfg/image/upload/v1658573452/x1bbffnq1cold8srit8p.jpg",
-  "title": "Photo Diory 2",
-  "caption": "Foto Diory 2"
+  "title": "Photo sinaga 2",
+  "caption": "Foto sinaga 2"
 }
 
 ###
@@ -61,11 +61,26 @@ Content-Type: application/json
   "title": "Photo Keren"
 }
 ###
-DELETE {{host}}/users/5
+DELETE {{host}}/users/3
 Authorization: Bearer {{token}}
 
 ###
-DELETE {{host}}/photos/2
+DELETE {{host}}/photos/1
 Authorization: Bearer {{token}}
 
+###
+POST {{host}}/comments
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
+{
+  "comment": "Photonya keren",
+  "PhotoId": 6
+}
+###
+DELETE {{host}}/comments/5
+Authorization: Bearer {{token}}
+
+###
+GET {{host}}/comments
+Authorization: Bearer {{token}}

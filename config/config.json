@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "password123!",
-    "database": "finalproject2",
+    "password": "12345",
+    "database": "finalproject2test",
     "host": "localhost",
     "dialect": "postgres",
     "port": 5432

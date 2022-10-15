@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
             Photo.hasMany(models.Comment,{
                 as:"Comment",
                 foreignKey:"PhotoId",
-                onDelete: 'cascade'
+                onDelete: 'cascade',
+                hooks:true
             });
         }
     }
