@@ -21,7 +21,13 @@ module.exports = (sequelize, DataTypes) => {
         as:"Comment",
         foreignKey:"UserId",
         onDelete: 'cascade'
-      })
+      });
+
+      User.hasMany(models.Medsos,{
+        as:"Medsos",
+        foreignKey:"UserId",
+        onDelete: 'cascade'
+      });
       // define association here
     }
   }

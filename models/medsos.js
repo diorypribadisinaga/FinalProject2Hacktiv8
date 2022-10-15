@@ -12,27 +12,30 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     Medsos.init({
-        medsos_name: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: "medsos cannot be omitted",
+                    msg: "name cannot be omitted",
                 },
                 notEmpty: {
-                    msg: "medsos cannot be an empty string",
+                    msg: "name cannot be an empty string",
                 }
             },
         },
-        username: {
+        social_media_url: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: "Username cannot be omitted",
+                    msg: "Social media url cannot be omitted",
                 },
                 notEmpty: {
-                    msg: "Username cannot be an empty string",
+                    msg: "Social media url cannot be an empty string",
+                },
+                isUrl: {
+                    msg: "Social media url format is wrong",
                 }
             },
         },

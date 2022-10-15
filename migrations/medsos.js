@@ -9,14 +9,19 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            medsos_name: {
+            name: {
                 type: Sequelize.STRING
             },
-            username: {
+            social_media_url: {
                 type: Sequelize.TEXT
             },
             UserId: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'Users',
+                    key: 'id'
+                },
+                onDelete: 'CASCADE'
             },
             createdAt: {
                 allowNull: false,

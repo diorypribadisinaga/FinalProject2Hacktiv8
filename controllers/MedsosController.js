@@ -1,34 +1,46 @@
-const {User,Photo}= require("./../models/index");
-const { compare } = require("./../helpers/hash");
+const {User,Photo,Medsos}= require("./../models/index");
 
 class MedsosController {
-	static async FindAll(req, res) {
-		const result = await User.findAll({order:[
-			['id','ASC']]
-		});
-		res.json(result)
-	}
+	static async getMedsos(req, res) {
+        try{
+            const result=await Medsos.findAll({include:[
+                {model: User,attributes:['id','username','profile_image_url']}
+            ], 
+            order:[['id','ASC']]});
+            res.status(200).json(result)
+        }catch (error){
+            next(error);
+        }
+    }
+
+    static async CreateMedsos(req,res,next){
+        try{
+            const {name, social_media_url}=req.body
+            const UserId=req.user.id
+            const result=await Medsos.create({name, social_media_url, UserId},{returning:true})
+            res.status(201).json(result)
+        }catch (err) {
+            next(err)
+        }
+    }
 
 	static async UpdateMedsos(req, res, next) {
 		try {
-			let {name_medsos, username, } = req.body;
+			const {name, social_media_url}=req.body
 			const id=req.params.id
-			const MedsosId = req.medsos.id
-			const medsos = await medsos.findOne(
+			const UserId=req.user.id
+			const medsos = await Medsos.findOne(
 				{where: {id}}
 			)
 			if(!medsos){
 				throw {name:"ErrNotFound"}
 			}
-			if (medsos.id !== MedsosId) {
+			if (medsos.UserId !== UserId) {
 				throw {name: "not allowed"}
 			}
-			if(!username) {
-				username = medsos.username
-			}
 			
-			const result = await medsos.update({
-				name_medsos, username
+			const result = await Medsos.update({
+				name, social_media_url
 			}, {where: {id},returning:true})
 			res.json(result[1])
 		} catch (err) {
@@ -40,15 +52,15 @@ class MedsosController {
 	static async DeleteMedsos(req,res,next){
 		try{
 			const id=req.params.id
-			const MedsosId = req.medsos.id
-			const medsos = await medsos.findOne(
-				{where:{id}}
+			const UserId=req.user.id
+			const medsos = await Medsos.findOne(
+				{where: {id}}
 			)
 			if(!medsos){
 				throw {name:"ErrNotFound"}
 			}
-			if (MedsosId!==user.id){
-				throw {name:"not allowed"}
+			if (medsos.UserId !== UserId) {
+				throw {name: "not allowed"}
 			}
 			await Medsos.destroy({where:{id}})
 			res.json({message:"successfully deleted"})
