@@ -1,10 +1,18 @@
-const { User,Photo } = require("./../models/index");
+const { User,Photo,Comment } = require("./../models/index");
 
 class PhotoController {
     static async getPhotos(req, res) {
         try{
-            const result=await Photo.findAll({include:[{model: User,attributes:['id','username','profile_image_url']}],order:[['id','ASC']]})
-            res.json(result)
+            const result=await Photo.findAll({include:[
+                {model: User,attributes:['id','username','profile_image_url']},
+                {
+                    model: Comment, 
+                    as: 'Comment', 
+                    attributes:['comment'], 
+                    include: [{model: User, attributes: ['username']}]}
+            ], 
+            order:[['id','ASC']]});
+            res.status(200).json(result)
         }catch (error){
             console.log(error)
             res.json(error)
@@ -46,7 +54,7 @@ class PhotoController {
             const result=await Photo.update({
                 poster_image_url,title,caption
             },{where:{id},returning:true})
-            res.json(result[1])
+            res.status(200).json(result[1])
         }catch (err){
             next(err)
         }
@@ -65,7 +73,7 @@ class PhotoController {
             await Photo.destroy(
                 {where:{id}}
             )
-            res.json({message:"Your photo has been successfully deleted"})
+            res.status(200).json({message:"Your photo has been successfully deleted"})
         }catch (err){
             next(err)
         }

@@ -11,9 +11,14 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
             Photo.belongsTo(models.User,{
                 foreignKey:'UserId'
+            });
+            
+            Photo.hasMany(models.Comment,{
+                as:"Comment",
+                foreignKey:"PhotoId",
+                onDelete: 'cascade'
             });
         }
     }
