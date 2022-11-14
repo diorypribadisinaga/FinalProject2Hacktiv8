@@ -29,6 +29,6 @@ module.exports = {
     database: `${DB_NAME}_production`,
     host: DB_HOST,
     dialect: "postgres",
-    port: 3011,
+    port: PORT,
   },
 };
