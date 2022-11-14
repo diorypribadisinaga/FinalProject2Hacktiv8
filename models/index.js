@@ -11,9 +11,9 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize('postgresql://postgres:h1KHyXJMqLbtmaTzDZKc@containers-us-west-117.railway.app:5731/railway');
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize('postgresql://postgres:h1KHyXJMqLbtmaTzDZKc@containers-us-west-117.railway.app:5731/railway');
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 fs
